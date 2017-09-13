@@ -9,6 +9,49 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand active" href="/products">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+      <p>Sort by:</p>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/products?sort=price">Price</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/products?sort=price-desc">Price Desc</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/products?show=discounted">Discounted</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/products?show=random">Random</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" aria-label="Search">
+      <a href="products/search" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</a>
+    </form>
+  </div>
+</nav>
+
+    
+      <% flash.each do |name, message| %>
+         <div class="alert alert-<%=name%> alert-dismissible fade show" role="alert">
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+          <%= message %>
+          </div>
+      <% end %>
+     
+      <div class="container">
+        <%= yield %>
+      </div>
   </body>
 </html>

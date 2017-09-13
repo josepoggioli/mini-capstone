@@ -1,0 +1,18 @@
+<h1>Product:<%= @product.name %></h1>
+<h4>Supplied by: <%= @product.supplier.name %></h4>
+
+<h3>Price: $<%= @product.price %></h3>
+<h4><%= @product.description %></h4>
+<h4>Quantity:<%= @product.quantity %></h4>
+<% @product.images.each do |image| %>
+<img src=<%= image.url %> width=500px height=500px>
+<% end %>
+<p><strong>tax:</strong>$<%= @product.tax %></p>
+<p><strong>total:</strong>$<%= @product.total %></p>
+<p><%= @product.sale_message %></p>
+<a class="btn btn-info" href="/products/<%= @product.id %>/edit">Edit</a>
+<%= form_tag "/products/#{@product.id}", method: :delete do %>
+    <input class="btn btn-danger" type="submit" value="Delete">
+ <% end %>
+
+<a href="/products">Back to all products</a>

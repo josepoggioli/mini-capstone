@@ -1,0 +1,27 @@
+<h1 id="index-top">Jose's Awesome Store</h1>
+<a href="/products/new">Create a new product</a><br/>
+<h2>Products:</h2>
+<br/>
+
+<div class="row">
+  <% @products.each do |product| %>
+    <div class="col-sm-4">
+      <div class="card" style="width: 20rem;">
+        <img class="card-img-top" src=<%= product.images.first.url %> alt="Card image cap">
+        <div class="card-block">
+          <h4 class="card-title"><%= product.name %></h4>
+          <p class="card-text"><%= product.description %><br/>
+          <strong>Price:</strong>$<%= product.price %><br/>
+          <strong>Quantity:</strong><%= product.quantity %></p>
+          <a href="/products/<%= product.id %>" class="btn btn-primary">Product Info</a>
+        </div>
+      </div>  
+    </div> 
+  <% end %>
+</div>
+<br/><br/>
+ <a href="/images/new">Add a new image</a>
+
+
+
+
