@@ -1,0 +1,12 @@
+<h1><%= @product.name %> Images</h1>
+<% if @product.images.size > 0 %>
+  <% @product.images.each do |image| %>
+  <img src=<%= image.url %> width=500px height=500px>
+  <%= form_tag "/images/#{image.id}", method: :delete do %>
+      <input class="btn btn-danger" type="submit" value="Delete">
+   <% end %>
+  <% end %>
+<% else %>
+<p>No images to display.</p>
+<% end %> 
+<a href="/products/<%= @product.id %>">Back to the Product page</a>

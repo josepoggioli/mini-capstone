@@ -1,0 +1,13 @@
+<h1>Order number:<%= @order.id %></h1>
+
+
+<h3>Order created by: <%= @order.user.name %></h3>
+<h3>Email: <%= @order.user.email %></h3>
+<p><strong>Subtotal:</strong>$<%= @order.subtotal %></p>
+<p><strong>tax:</strong>$<%= @order.tax %></p>
+<p><strong>total:</strong>$<%= @order.total %></p>
+<p>Order made on: <%= @order.created_at %></p>
+
+
+
+<a href="/products">Back to all products</a>

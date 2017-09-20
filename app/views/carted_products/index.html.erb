@@ -1,0 +1,32 @@
+<h2>Cart:</h2>
+<% if current_user && current_user.carted_products.where(status: "carted")%>
+<div class="row">
+  <% @products.each do |cartedproduct| %>
+    <div class="col-sm-4">
+      <div class="card" style="width: 20rem;">
+        <img class="card-img-top" src=<%= cartedproduct.product.images.first.url %> alt="Card image cap">
+        <div class="card-block">
+          <h4 class="card-title"><%= cartedproduct.product.name %></h4>
+          <p class="card-text">
+          <strong>Quantity:</strong><%= cartedproduct.quantity %><br/>
+          <strong>Price:</strong>$<%= cartedproduct.product.price %>
+          </p>
+        </div>
+      </div> 
+      <%= form_tag "/cart/#{cartedproduct.id}", method: :delete do %>
+        <input class="btn btn-danger" type="submit" value="remove">
+      <% end %> 
+    </div> 
+    
+
+  <% end %>
+</div>
+<br/>
+    <p><strong>Subtotal: </strong><%= @subtotal %></p>
+    <p><strong>tax: </strong><%= @tax %></p>
+    <p><strong>total: </strong><%= @total %></p>
+
+   <%= form_tag '/orders', method: :post do  %>
+   <%= submit_tag "buy" %>
+   <% end %>
+<% end %>

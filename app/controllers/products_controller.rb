@@ -12,6 +12,8 @@ class ProductsController < ApplicationController
       @products = Product.order("RANDOM()").limit(1)
     elsif params[:show]=='search'
       @products = Product.find_by(name: params[:search])
+    elsif params[:category]
+      @products = Category.find_by(title: params[:category]).products
     end
     render "index.html.erb"
   end
@@ -24,13 +26,12 @@ class ProductsController < ApplicationController
    @new_product = Product.new(
       name: params[:name],
       price: params[:price],
-      image: params[:image],
       description: params[:description],
       quantity: params[:quantity],
       )
     @new_product.save
     flash[:success] = "Product successfully created!"
-    render "create.html.erb"
+    redirect_to "/products/#{product.id}"
   end  
 
   def show
@@ -48,7 +49,6 @@ class ProductsController < ApplicationController
     product.update(
       name: params[:name],
       price: params[:price],
-      image: params[:image],
       description: params[:description],
       quantity: params[:quantity],
       )
@@ -61,6 +61,12 @@ class ProductsController < ApplicationController
     @product.destroy
     flash[:danger] = "Product succesfully destroyed!"
     render "destroy.html.erb"
+  end
+
+  def search
+    search_term = params[:search]
+    @products = Product.where("name ILIKE ?", "%#{search_term}%")
+    render "index.html.erb"
   end
 
 end

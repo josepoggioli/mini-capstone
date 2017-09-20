@@ -1,11 +1,8 @@
 <h1>Add new Image:</h1>
 
-<%= form_tag "/images", method: :post do %>
+<%= form_tag "/images/#{@product.id}", method: :post do %>
   <div>
     Image url: <input type="text" name="url">
   </div>
-  <div>
-    Product id: <input type="text" name="product_id">
-  </div>
-  <input type="submit" value="Save Recipe">
+  <input type="submit" value="Save image">
 <% end %>

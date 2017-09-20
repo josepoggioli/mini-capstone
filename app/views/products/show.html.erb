@@ -10,9 +10,30 @@
 <p><strong>tax:</strong>$<%= @product.tax %></p>
 <p><strong>total:</strong>$<%= @product.total %></p>
 <p><%= @product.sale_message %></p>
+<h4>Categories:</h4>
+<ul>
+  <% @product.categories.each do |category| %>
+  <li><%= category.title.capitalize %></li>
+  <% end %>
+  </ul>
+<a class="btn btn-success" href="/products/<%= @product.id %>/images/new">Add image</a>
 <a class="btn btn-info" href="/products/<%= @product.id %>/edit">Edit</a>
 <%= form_tag "/products/#{@product.id}", method: :delete do %>
     <input class="btn btn-danger" type="submit" value="Delete">
  <% end %>
+ <a class="btn btn-secondary" href="/products/<%= @product.id %>/images">See Images</a>
+  <br/><br/>
+ <h2>Make a new order:</h2>
+<%= form_tag '/cart', method: :post do  %>
+   <div>
+     <%= hidden_field_tag :product_id, @product.id  %>
+   </div>
+   <div>
+     <%= label_tag :quantity %>
+     <%= text_field_tag :quantity %>
+   </div>
+  <%= submit_tag "Add to cart" %>
+  <% end %>
+  <br/>
 
 <a href="/products">Back to all products</a>
